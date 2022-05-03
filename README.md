@@ -24,31 +24,30 @@ You can easily change the hyper-parameters such as learning rate, number of epoc
 # Ensembling the detection networks of three different perpendicular planes:
 
 Here, we make a complete python code for the second stage available for researchers.
+The file named "TPE-Det.py" contains processing steps for ensembling detection networks by final bounding box selection.
 
-The file named "CMB_3DCNN.py" contains all processing steps: data reading, 3D network generation, training and testing the model, and saving the network weights and predicted labels.
-You can easily change the hyper-parameters such as learning rate, number of epochs, batch size, and selecting appropriate loss function and optimizer.
+Initially, we independently detected the CMBs using the axial, sagittal, and coronal images via the proposed TPE-Det. 
+
+Then, the three-dimensional coordinates of each detected candidate were calculated from its x and y coordinates and the slice number of the image. 
+
+Afterward, we calculated the Euclidean distances between the candidates detected from each plane and deemed the objects to be single CMB if they were closer than a pre-set distance threshold value. 
+
+Based on this method, the candidates detected on all three planes were considered to be our final detections. 
 
 # Dataset:
-The dataset used in this project has been collected with a collaboration between the Medical Imaging LABoratory (MILAB) at Yonsei University and Gachon University Gil Medical Center.
 
-Our dataset contains two in-plane resolutions as follows:
-1. High in-plane resolution (HR): 0.50x0.50 mm^2, and
-2. Low in-plane resolution (LR): 0.80x0.80 mm^2.
+Two datasets (DS1 & DS2) were used in this project. DS1 was collected from Gachon University Gil Medical Center, the Republic of Korea. The SWI data were acquired using 3.0 T Verio and Skyra Siemens MRI scanners (Siemens Healthineers, Germany) with the following imaging parameters: a resolution of 0.5×0.5×2.0 mm3, a repetition time (TR) of 27 ms, an echo time (TE) of 20 ms, a flip angle (FA) of 15°, and a field of view (FOV) of 256×224×144 mm3. A total of 116 subjects with 367 microbleeds and 12 subjects not including CMBs were collected.
 
-HR data composites of 72 subjects, while LR data contains 107 subjects.
-All Data contain SWI, Phase and Magnitude images.
+Additionally, to evaluate our approach’s generalizability, we collected another dataset (DS2) from Seoul National University Hospital (SNUH), the Republic of Korea, with different acquisition parameters. The SWI data were acquired using a 3.0 T Biograph mMR Siemens MRI scanner (Siemens Healthineers, Germany) with the following protocol: a resolution of 0.5×0.5×3.0 mm3, a TR of 28 ms, a TE of 20 ms, an FA of 15°, and an FOV of 192×219×156 mm3. Note that this slice thickness (i.e.,3.0 mm) is commonly used in routine clinical practice (MICCAI, 2021). A total of 58 subjects with 148 microbleeds and 21 subjects absent from CMBs were collected. 
 
-The Label folder involves excel files, where each excel file is with the same name as data in the Data folder.
-The information of the location of cerebral microbleeds (CMBs) in brain images exist in those excel files as follow:
-- 1st column represents the slice number of subject,
-- 2nd and 3rd columns indicate the x(column-wise) and y(row-wise) pixel location of CMB in that slice, respectively.
+Both studies were approved by the individual Institutional Review Board (IRB) of Gachon University Gil Medical Center and SNUH. 
 
-** Source code is provided. However, due to patent transfer issue, no longer able to provide the data.
+** The utilized MRI data cannot be made openly available due to the privacy issues of clinical data.
 
-# Published-Paper:
+<!-- # Published-Paper:
 
 [1] Mohammed A. Al-masni, Woo-Ram Kim, Eung Yeop Kim, Young Noh, and Dong-Hyun Kim “Automated Detection of Cerebral Microbleeds in MR Images: A Two-Stage Deep Learning Approach,” NeuroImage: Clinical, vol. 28, pp. 102464, 2020. [ELSEVIER Publisher]
 
 [2] Mohammed A. Al-masni, Woo-Ram Kim, Eung Yeop Kim, Young Noh, and Dong-Hyun Kim, “A Two Cascaded Network Integrating Regional–based YOLO and 3D-CNN for Cerebral Microbleeds Detection,” in the 42nd Annual International Conferences of the IEEE Engineering in Medicine and Biology Society (EMBC), pp. 1055-1058. IEEE, Montreal, Quebec, Canada, 2020.
 
-When using our code or dataset for research publications, please cite our papers.
+When using our code or dataset for research publications, please cite our papers. -->
