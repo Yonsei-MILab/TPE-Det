@@ -2,20 +2,26 @@
 
 This project is developed to detect cerebral microbleeds (CMBs) from brain MR images. 
 
-To do so, we have proposed a fully automated two-stage integrated deep learning approach for efficient CMBs detection. 
+To do so, we have proposed a end-to-end TPE-Det (Triplanar Ensemble Detection Network) with only a single-stage utilizing the ensemble of 2D CNN-based networks. 
 
-The detection stage via the regional-based YOLO endeavors to deny the background regions and simultaneously retrieve potential microbleeds candidates. 
+First, we independently detect the CMBs using axial, sagittal, and coronal images via EfficientDet, one of the state-of-the-art 2D object detection networks. We exploit MR susceptibility-weighted imaging (SWI) and phase images as two-channel inputs for the network. 
 
-The 3D-CNN stage is developed to reduce the false positives and single out the accurate microbleeds.
+Then, by calculating and comparing the three-dimensional coordinates of each candidate from each plane, the detected candidates on all three planes are considered to be our final detections.
 
+# CMBs-Candidate-Detection-Via-EfficientDet:
 
-# CMBs-Candidate-Detection-Via-YOLO:
+We employed EfficientDet for our 2D detection networks.
 
-The source code of this stage is available at: https://pjreddie.com/darknet/yolov2/.
+The github repos for EfficientDet:
 
-Moreover, we have uploaded the yolov2.cfg file in this repository.
+EfficientDet-PyToch: https://github.com/rwightman/efficientdet-pytorch
 
-# False-Positive-Reduction-via-3D-CNN:
+PyTorch-Image-Models: https://github.com/rwightman/pytorch-image-models
+
+Here, we make a complete python code for training EfficientDet and performing inference in "TPE-Det.py".
+You can easily change the hyper-parameters such as learning rate, number of epochs, batch size, and selecting appropriate loss function and optimizer.
+
+# Ensembling the detection networks of three different perpendicular planes:
 
 Here, we make a complete python code for the second stage available for researchers.
 
