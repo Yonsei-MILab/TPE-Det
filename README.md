@@ -1,8 +1,8 @@
 # TPE-Det
 
-This project is developed to detect cerebral microbleeds (CMBs) from brain MR images. 
+This project is developed to detect cerebral microbleeds (CMBs) from brain 3D MR images. 
 
-To do so, we have proposed a end-to-end TPE-Det (Triplanar Ensemble Detection Network) with only a single-stage utilizing the ensemble of 2D CNN-based networks. 
+To do so, we have proposed an end-to-end TPE-Det (Triplanar Ensemble Detection Network) with only a single-stage utilizing the ensemble of 2D CNN-based networks. 
 
 First, we independently detect the CMBs using axial, sagittal, and coronal images via EfficientDet, one of the state-of-the-art 2D object detection networks. We exploit MR susceptibility-weighted imaging (SWI) and phase images as two-channel inputs for the network. 
 
@@ -12,19 +12,17 @@ Then, by calculating and comparing the three-dimensional coordinates of each can
 
 We employed EfficientDet for our 2D detection networks.
 
-The github repos for EfficientDet:
+The GitHub repositories for EfficientDet:
 
 EfficientDet-PyToch: https://github.com/rwightman/efficientdet-pytorch
 
 PyTorch-Image-Models: https://github.com/rwightman/pytorch-image-models
 
-Here, we make a complete python code for training EfficientDet and performing inference in "TPE-Det.py".
-You can easily change the hyper-parameters such as learning rate, number of epochs, batch size, and selecting appropriate loss function and optimizer.
+Here, we make a complete python code for training EfficientDet and performing inference in "TPE-Det.py."
 
 # Ensembling the detection networks of three different perpendicular planes:
 
-Here, we make a complete python code for the second stage available for researchers.
-The file named "TPE-Det.py" contains processing steps for ensembling detection networks by final bounding box selection.
+The file named "TPE-Det.py" contains the processing steps for ensembling detection networks through final bounding box selection.
 
 Initially, we independently detected the CMBs using the axial, sagittal, and coronal images via the proposed TPE-Det. 
 
